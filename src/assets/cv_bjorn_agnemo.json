@@ -1,0 +1,86 @@
+{
+  "name": [
+    "Björn",
+    "Agnemo"
+  ],
+  "occupation": "Student",
+  "location": "Domsjö, SE",
+  "email": "bjorn.agnemo@gmail.com",
+  "github": "cave-bjornson",
+  "phone": "0703038338",
+  "content": [
+    {
+      "sectionTitle": "Profil",
+      "items": [
+        {
+          "itemTitle": "Född 1980 och uppvuxen i Örnsköldsvik. Tidigt intresse av datorer och programmering. Intresserad av alla aspekter av mjukvaru-utveckling men speciellt felsökning och automatiserade tester."
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Arbetslivserfarenheter",
+      "entries": [
+        {
+          "entryTitle": "Domsjö Fabriker AB, Domsjö -- Laborant",
+          "items": [
+            "Avdelning laboratorium/miljö.",
+            "Kvalitetskontroll och miljöanalyser."
+          ]
+        },
+        {
+          "entryTitle": "Kreatoriet AB, Umeå -- It-tekniker/Webbutvecklare",
+          "items": [
+            "Support för coworking space.",
+            "Utveckling och underhåll av företagets webbsida (Wordpress).",
+            "Underhåll av företagets faktureringstjänst (Django)."
+          ]
+        },
+        {
+          "entryTitle": "Norrlands Signalbataljon -- Systemtekniker",
+          "items": [
+            {
+              "itemTitle": "Reparation och underhåll av tele/radiomaster, elverk och elinstallationer."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Utbildning",
+      "items": [
+        {
+          "itemTitle": "Systemutvecklare .Net med AI-kompetens -- Edugrade, Örnsköldsvik"
+        },
+        {
+          "itemTitle": "Systemutvecklare Java -- Yrkesakademin, Sundsvall"
+        },
+        {
+          "itemTitle": "Kurser i datavetenskap -- Umeå Universitet, Umeå"
+        },
+        {
+          "itemTitle": "Grundläggande konstnärsutbildning -- Umeå konstskola, Umeå"
+        },
+        {
+          "itemTitle": "Naturvetenskapligt program -- Nolaskolan, Örnsköldsvik"
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Färdigheter",
+      "items": [
+        {
+          "itemTitle": "C\\#/.NET, ASP.NET, Java, Spring Boot, Python, C, HTML, CSS LaTeX, Javascript, React, Wordpress",
+          "itemSideText": "IT"
+        },
+        {
+          "itemTitle": "Svenska (modersmål), Engelska (flytande), Tyska (lite)",
+          "itemSideText": "Språk"
+        },
+        {
+          "itemTitle": "Bil (B), Truck (AB)",
+          "itemSideText": "Körkort"
+        }
+      ]
+    }
+  ]
+}
