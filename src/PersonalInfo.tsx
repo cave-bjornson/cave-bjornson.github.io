@@ -15,38 +15,34 @@ export interface Person {
   phone: string;
 }
 
-export const PersonalInfo = ({
-  email,
-  location,
-  name,
-  occupation,
-  phone,
-}: Person) => {
+export const PersonalInfo = ({ person }: { person: Person }) => {
   return (
     <div>
-      <div className="profile-pic-container">
+      <div className="relative">
         <img src="https://placehold.co/500x333" alt="" />
-        <h2 className="profile-caption">{name}</h2>
+        <span className="absolute object-left-bottom bottom-1 text-3xl">
+          {person.name}
+        </span>
       </div>
       <div>
         <ul>
           <li className="flex">
             <BriefcaseIcon className="h-6 w-6" />
-            <span className="icon-text">{occupation}</span>
+            <span className="icon-text">{person.occupation}</span>
           </li>
           <li className="flex">
             <HomeIcon className="h-6 w-6" />
-            <span className="icon-text">{location}</span>
+            <span className="icon-text">{person.location}</span>
           </li>
           <li className="flex">
             <EnvelopeIcon className="h-6 w-6"></EnvelopeIcon>
             <span className="icon-text">
-              <a href="mailto:bjorn.agnemo@gmail.com">{email}</a>
+              <a href="mailto:bjorn.agnemo@gmail.com">{person.email}</a>
             </span>
           </li>
           <li className="flex">
             <PhoneIcon className="h-6 w-6"></PhoneIcon>
-            <span className="icon-text">{phone}</span>
+            <span className="icon-text">{person.phone}</span>
           </li>
         </ul>
       </div>
@@ -56,41 +52,68 @@ export const PersonalInfo = ({
 
 export const ListBox = ({
   heading,
+  className,
   skills,
   icon,
 }: {
   heading: string;
+  className: string;
   skills: Array<string | ReactElement>;
   icon?: ReactElement;
 }) => {
   return (
     <div>
-      <div className="flex">
+      <div className="flex items-center">
         {icon}
-        <span className="icon-text">{heading}</span>
+        <span className={className}>{heading}</span>
       </div>
       <ul>
-        {skills.map((value) => (
-          <li>{value}</li>
+        {skills.map((value, index) => (
+          <li key={index}>{value}</li>
         ))}
       </ul>
     </div>
   );
 };
 
-export const LanguageBoxItem = ({
-  language,
-  max,
-  value,
+export const LanguageBoxItem = ({ language: [name, value] }) => {
+  return (
+    <>
+      <span className="block">{name}</span>
+      <progress max={4} value={value}></progress>
+    </>
+  );
+};
+
+export const CVBoxItem = ({
+  heading,
+  content,
 }: {
-  language: string;
-  max: number;
-  value: number;
+  heading: string;
+  content: string | ReactElement;
 }) => {
   return (
     <>
-      <span className="block">{language}</span>
-      <progress max={max} value={value}></progress>
+      <div className="font-bold">{heading}</div>
+      <div>{content}</div>
+    </>
+  );
+};
+
+export const CVBoxContent = ({ items }) => {
+  return (
+    <>
+      {items.length === 1 ? (
+        <div>{items[0].itemTitle}</div>
+      ) : (
+        <ul>
+          {items.map((item, index) => (
+            <li key={index} className="list-inside list-disc">
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };
