@@ -4,7 +4,7 @@ import {
   LanguageBoxItem,
   ListBox,
   PersonalInfo,
-} from "./PersonalInfo.tsx";
+} from "../../components/PersonalInfo.tsx";
 import {
   AcademicCapIcon,
   BriefcaseIcon,
@@ -12,9 +12,9 @@ import {
   StarIcon,
   TruckIcon,
 } from "@heroicons/react/24/solid";
-import { useCvData } from "./hooks.tsx";
+import { useCvData } from "../../components/hooks.tsx";
 
-export const CV = () => {
+export const Component = () => {
   const {
     person,
     drivingLicenses,

@@ -1,8 +1,8 @@
-import { useFakeOctokit } from "./hooks.tsx";
+import { useFakeOctokit } from "../../components/hooks.tsx";
 import { useState } from "react";
 import { Modal } from "react-responsive-modal";
 
-export const Portfolio = () => {
+export const Component = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [item, setItem] = useState(null);
 

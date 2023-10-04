@@ -1,8 +1,8 @@
-import cv_data from "./assets/cv_bjorn_agnemo.json";
+import cv_data from "../assets/cv_bjorn_agnemo.json";
 import { Person } from "./PersonalInfo.tsx";
 import { useEffect, useState } from "react";
 import { Octokit } from "@octokit/rest";
-import gh_data from "./assets/gh.json";
+import gh_data from "../assets/gh.json";
 
 export interface Root {
   name: string[];

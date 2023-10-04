@@ -1,8 +1,8 @@
-import { ListBox, PersonalInfo } from "./PersonalInfo.tsx";
+import { ListBox, PersonalInfo } from "../../components/PersonalInfo.tsx";
 import { FaceSmileIcon } from "@heroicons/react/24/solid";
-import { useCvData } from "./hooks.tsx";
+import { useCvData } from "../../components/hooks.tsx";
 
-export const About = () => {
+export const Component = () => {
   const { person } = useCvData();
 
   return (

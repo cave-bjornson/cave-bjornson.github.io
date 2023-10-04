@@ -1,9 +1,15 @@
 import { NavLink } from "react-router-dom";
-import { BriefcaseIcon, FolderIcon, UserIcon } from "@heroicons/react/24/solid";
+import {
+  BriefcaseIcon,
+  FolderIcon,
+  UserIcon,
+  PencilSquareIcon,
+} from "@heroicons/react/24/solid";
 import {
   UserIcon as UserOutlineIcon,
   BriefcaseIcon as BriefCaseOutlineIcon,
   FolderIcon as FolderOutlineIcon,
+  PencilSquareIcon as PencilSquareOutlineIcon,
 } from "@heroicons/react/24/outline";
 import { ReactElement } from "react";
 export const Nav = () => {
@@ -12,7 +18,7 @@ export const Nav = () => {
       <nav>
         <ul className="lg:flex">
           <li>
-            <NavLink to="/" className="flex">
+            <NavLink to="about" className="flex">
               {({ isActive }) => (
                 <CVLink
                   text="Om Mig"
@@ -43,6 +49,18 @@ export const Nav = () => {
                   isActive={isActive}
                   activeIcon={<FolderIcon className="h-6 w-6" />}
                   inActiveIcon={<FolderOutlineIcon className="h-6 w-6" />}
+                />
+              )}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="blog" className="flex">
+              {({ isActive }) => (
+                <CVLink
+                  text="Blog"
+                  isActive={isActive}
+                  activeIcon={<PencilSquareIcon className="h-6 w-6" />}
+                  inActiveIcon={<PencilSquareOutlineIcon className="h-6 w-6" />}
                 />
               )}
             </NavLink>

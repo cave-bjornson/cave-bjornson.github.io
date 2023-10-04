@@ -1,19 +1,20 @@
 import useKeypress from "react-use-keypress";
-import { useEffect, useState } from "react";
-import { useNavigate, useRoutes } from "react-router-dom";
-import { CV } from "./CV.tsx";
-import { Simple404 } from "@404pagez/react";
-import { About } from "./About.tsx";
-import { Nav } from "./Nav.tsx";
-import { Portfolio } from "./Portfolio.tsx";
+import { Suspense, useEffect, useState } from "react";
+import { RouterProvider, useNavigate, useRoutes } from "react-router-dom";
+// import { Simple404 } from "@404pagez/react";
+// import { About } from "./index.tsx";
+import { Nav } from "./components/Nav.tsx";
+// import { Portfolio } from "./Portfolio.tsx";
 import { Modal } from "react-responsive-modal";
+import { router } from "./router.ts";
+import { MainLayout } from "./components/MainLayout.tsx";
 
 export const App = () => {
   const [nKeyPress, setNKeyPress] = useState(0);
   const [leetOpen, setLeetOpen] = useState(false);
 
   const keySequence = ["1", "3", "3", "7"];
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     if (nKeyPress >= keySequence.length) {
@@ -43,37 +44,39 @@ export const App = () => {
     setLeetOpen(false);
   };
 
-  const element = useRoutes([
-    {
-      path: "/",
-      element: <About />,
-    },
-    { path: "cv", element: <CV /> },
-    { path: "portfolio", element: <Portfolio /> },
-    {
-      path: "*",
-      element: (
-        <Simple404
-          size={20}
-          isButton={true}
-          buttonLabel="Home"
-          onButtonClick={() => {
-            navigate("/");
-          }}
-        />
-      ),
-    },
-  ]);
+  // const element = useRoutes([
+  //   {
+  //     path: "/",
+  //     element: <About />,
+  //   },
+  //   { path: "cv", element: <CV /> },
+  //   { path: "portfolio", element: <Portfolio /> },
+  //   { path: "blog", element: "" },
+  //   {
+  //     path: "*",
+  //     element: (
+  //       <Simple404
+  //         size={20}
+  //         isButton={true}
+  //         buttonLabel="Home"
+  //         onButtonClick={() => {
+  //           navigate("/");
+  //         }}
+  //       />
+  //     ),
+  //   },
+  // ]);
 
   return (
     <>
-      <Nav />
-      <div id="main-content" className="lg:flex">
-        {element}
-        <Modal open={leetOpen} onClose={onCloseLeetModal} center={true}>
-          <h1>1337</h1>
-        </Modal>
-      </div>
+      {/*<Nav />*/}
+
+      <Suspense fallback={<div>Loading...</div>}>
+        <RouterProvider router={router} />
+      </Suspense>
+      <Modal open={leetOpen} onClose={onCloseLeetModal} center={true}>
+        <h1>1337</h1>
+      </Modal>
     </>
   );
 };
