@@ -6,8 +6,11 @@ import mdx from "@mdx-js/rollup";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    { enforce: "pre", ...mdx() },
+    {
+      enforce: "pre",
+      ...mdx({ providerImportSource: "@mdx-js/react" }),
+    },
     react(),
-    RemixRouter({ extensions: ["jsx", "tsx"] }),
+    RemixRouter({ extensions: ["tsx", "mdx"] }),
   ],
 });
