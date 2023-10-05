@@ -5,15 +5,7 @@ import {
   PhoneIcon,
 } from "@heroicons/react/24/solid";
 import { ReactElement } from "react";
-
-export interface Person {
-  name: string;
-  occupation: string;
-  location: string;
-  email: string;
-  github: string;
-  phone: string;
-}
+import { languageTuple, Person } from "./hooks.tsx";
 
 export const PersonalInfo = ({ person }: { person: Person }) => {
   return (
@@ -76,7 +68,7 @@ export const ListBox = ({
   );
 };
 
-export const LanguageBoxItem = ({ language: [name, value] }) => {
+export const LanguageBoxItem = ([name, value]: languageTuple) => {
   return (
     <>
       <span className="block">{name}</span>

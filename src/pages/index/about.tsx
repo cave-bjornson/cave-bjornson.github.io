@@ -2,7 +2,7 @@ import { ListBox, PersonalInfo } from "../../components/PersonalInfo.tsx";
 import { FaceSmileIcon } from "@heroicons/react/24/solid";
 import { useCvData } from "../../components/hooks.tsx";
 
-export const Component = () => {
+const About = () => {
   const { person } = useCvData();
 
   return (
@@ -28,3 +28,5 @@ export const Component = () => {
     </>
   );
 };
+
+export default About;

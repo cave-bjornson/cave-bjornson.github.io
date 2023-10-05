@@ -1,20 +1,21 @@
 import { useFakeOctokit } from "../../components/hooks.tsx";
 import { useState } from "react";
 import { Modal } from "react-responsive-modal";
+import { GithubRepo } from "../../components/hooks.tsx";
 
-export const Component = () => {
+const Portfolio = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [item, setItem] = useState(null);
+  const [item, setItem] = useState("");
 
   //const { repos } = useOctokit();
-  const { repos } = useFakeOctokit();
+  const repos: Array<GithubRepo> = useFakeOctokit();
 
-  const onOpenModal = (portfolioitem) => {
+  const onOpenModal = (portfolioitem: string): void => {
     setItem(portfolioitem);
     setModalOpen(true);
   };
   const onCloseModal = () => {
-    setItem(null);
+    setItem("");
     setModalOpen(false);
   };
 
@@ -22,7 +23,7 @@ export const Component = () => {
     <>
       <ol>
         {repos &&
-          repos.map((repo) => (
+          repos.map((repo: GithubRepo) => (
             <li key={repo.id} onClick={() => onOpenModal(repo.name)}>
               {repo.name}
             </li>
@@ -34,3 +35,5 @@ export const Component = () => {
     </>
   );
 };
+
+export default Portfolio;

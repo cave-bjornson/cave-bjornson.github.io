@@ -21,6 +21,6 @@
     "noFallthroughCasesInSwitch": true,
     "types": ["vite-plugin-remix-router/client"]
   },
-  "include": ["src"],
+  "include": ["src", "decs.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,13 +1,14 @@
 import useKeypress from "react-use-keypress";
 import { Suspense, useEffect, useState } from "react";
-import { RouterProvider, useNavigate, useRoutes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 // import { Simple404 } from "@404pagez/react";
 // import { About } from "./index.tsx";
-import { Nav } from "./components/Nav.tsx";
+// import { Nav } from "./components/Nav.tsx";
 // import { Portfolio } from "./Portfolio.tsx";
 import { Modal } from "react-responsive-modal";
-import { router } from "./router.ts";
-import { MainLayout } from "./components/MainLayout.tsx";
+// import { router } from "./router.ts";
+// import { MainLayout } from "./components/MainLayout.tsx";
+import routes from "~react-pages";
 
 export const App = () => {
   const [nKeyPress, setNKeyPress] = useState(0);
@@ -26,7 +27,7 @@ export const App = () => {
     setNKeyPress(nKeyPress + 1);
   };
 
-  useKeypress(["1", "3", "7"], (event) => {
+  useKeypress(["1", "3", "7"], (event: { key: string }) => {
     if (event.key === keySequence[nKeyPress]) {
       console.log(event.key);
       incrementCount();
@@ -72,7 +73,8 @@ export const App = () => {
       {/*<Nav />*/}
 
       <Suspense fallback={<div>Loading...</div>}>
-        <RouterProvider router={router} />
+        {/*<RouterProvider router={router} />*/}
+        {useRoutes(routes)}
       </Suspense>
       <Modal open={leetOpen} onClose={onCloseLeetModal} center={true}>
         <h1>1337</h1>

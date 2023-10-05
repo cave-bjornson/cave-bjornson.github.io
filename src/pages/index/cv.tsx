@@ -3,6 +3,7 @@ import {
   CVBoxItem,
   LanguageBoxItem,
   ListBox,
+  Person,
   PersonalInfo,
 } from "../../components/PersonalInfo.tsx";
 import {
@@ -14,7 +15,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { useCvData } from "../../components/hooks.tsx";
 
-export const Component = () => {
+const CV = () => {
   const {
     person,
     drivingLicenses,
@@ -73,3 +74,5 @@ export const Component = () => {
     </>
   );
 };
+
+export default CV;

@@ -1,7 +1,10 @@
-import { Outlet } from "react-router-dom";
 import { Nav } from "../components/Nav.tsx";
+import { Outlet } from "react-router-dom";
 
-export const Component = () => {
+import routes from "~react-pages";
+const Home = () => {
+  // console.log(routes);
+
   return (
     <>
       <Nav />
@@ -11,3 +14,5 @@ export const Component = () => {
     </>
   );
 };
+
+export default Home;
