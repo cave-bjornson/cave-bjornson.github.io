@@ -1,8 +1,9 @@
-import cv_data from "../assets/cv_bjorn_agnemo.json";
+import cv_json from "../assets/cv_bjorn_agnemo.json";
 import { useEffect, useState } from "react";
-import { Octokit } from "@octokit/rest";
+// import { Octokit } from "@octokit/rest";
 import gh_json from "../assets/gh.json";
 import routes from "~react-pages";
+import { CVBItem } from "./PersonalInfo.tsx";
 
 export interface Root {
   person: Person;
@@ -31,14 +32,46 @@ export interface Item {
 
 export interface Entry {
   entryTitle: string;
-  items: string[] | object;
+  items: string[] | Item[] | undefined;
+}
+
+export interface CVData {
+  person: Person;
+  drivingLicenses: string[] | undefined;
+  techSkills: string[] | undefined;
+  languageSkills: LanguageItem[] | undefined;
+  educations: EducationItem[] | undefined;
+  workEntries: CVBItem[] | undefined;
+}
+
+export interface EducationItem {
+  school: string;
+  course: string;
+}
+
+export interface LanguageItem {
+  name: string;
+  value: number;
+  language: null;
 }
 
 export type languageTuple = [string, number];
 
-export const useCvData = () => {
-  const cv = cv_data as unknown as Root;
-  const { person, content }: { person: Person; content: Section[] } = cv;
+export const useCvData = (): CVData => {
+  const cv = cv_json as unknown as Root;
+  const person = cv.person;
+  const content = cv.content;
+
+  //console.log(cv);
+
+  const cvData: CVData = {
+    drivingLicenses: [],
+    educations: [],
+    languageSkills: [],
+    person: person,
+    techSkills: [],
+    workEntries: [],
+  };
 
   const skillSection = content.find(
     (section) => section.sectionTitle === "Färdigheter"
@@ -48,42 +81,57 @@ export const useCvData = () => {
     (item) => item.itemSideText === "Körkort"
   );
 
-  const drivingLicenses = drivingLicenseItem?.itemTitle.split(", ");
+  cvData.drivingLicenses = drivingLicenseItem?.itemTitle.split(", ");
 
-  const techSkills = skillSection?.items
+  cvData.techSkills = skillSection?.items
     ?.find((item) => item.itemSideText === "IT")
     ?.itemTitle.split(", ");
 
-  const languageSkills = skillSection?.items
+  cvData.languageSkills = skillSection?.items
     ?.find((item) => item.itemSideText === "Språk")
     ?.itemTitle.split(", ")
-    .map((language) => language.split(" "))
-    .reduce((acc, key) => {
-      return { ...acc, [key[0]]: key[1] };
-    }, {});
+    .map((language): LanguageItem => {
+      const split = language.split(" ");
+      return {
+        name: split[0] as string,
+        value: split[1] as unknown as number,
+      } as LanguageItem;
+    });
 
-  const educations = cv.content
+  cvData.educations = cv.content
     .find((section) => section.sectionTitle === "Utbildning")
     ?.items?.map((item) => {
-      const [course, school] = item.itemTitle.split(" -- ");
-      return { course, school };
+      const split = item.itemTitle.split(" -- ");
+      const educationItem: EducationItem = {
+        course: split[0],
+        school: split[1],
+      };
+      return educationItem;
     });
 
   const workEntries = cv.content.find(
     (section) => section.sectionTitle === "Arbetslivserfarenheter"
   )?.entries;
 
-  return {
-    person,
-    drivingLicenses,
-    techSkills,
-    languageSkills,
-    educations,
-    workEntries,
-  };
+  cvData.workEntries = workEntries?.map((entry) => {
+    const cvbItem: CVBItem = {
+      items: undefined,
+      str: undefined,
+      title: undefined,
+    };
+    cvbItem.title = entry.entryTitle;
+    if (entry.items?.length === 1) {
+      cvbItem.items = entry.items as Item[];
+    } else {
+      cvbItem.str = entry.items as string[];
+    }
+    return cvbItem;
+  });
+
+  return cvData;
 };
 
-export const octokit = new Octokit();
+//export const octokit = new Octokit();
 
 // export const useOctokit = () => {
 //   const [repos, setRepos] = useState([]);
@@ -115,7 +163,7 @@ export const useFakeOctokit = (): Array<GithubRepo> => {
       (repo: { topics: string | string[] }) => repo.topics.includes("portfolio")
     );
     setRepos(filtered);
-  }, []);
+  }, [gh]);
 
   return repos;
 };
@@ -156,7 +204,7 @@ export const useLinks = () => {
 //   return { posts };
 //};
 
-interface GithubRepo {
+export interface GithubRepo {
   id: number;
   name: string;
   topics: Array<string>;

@@ -3,7 +3,6 @@ import {
   CVBoxItem,
   LanguageBoxItem,
   ListBox,
-  Person,
   PersonalInfo,
 } from "../../components/PersonalInfo.tsx";
 import {
@@ -13,40 +12,35 @@ import {
   StarIcon,
   TruckIcon,
 } from "@heroicons/react/24/solid";
-import { useCvData } from "../../components/hooks.tsx";
+import { CVData, LanguageItem, useCvData } from "../../components/hooks.tsx";
 
 const CV = () => {
-  const {
-    person,
-    drivingLicenses,
-    techSkills,
-    languageSkills,
-    educations,
-    workEntries,
-  } = useCvData();
+  const cv: CVData = useCvData();
 
   return (
     <>
       <aside>
-        <PersonalInfo person={person} />
+        <PersonalInfo person={cv.person} />
         <ListBox
           heading="Färdigheter"
           className="font-bold"
-          skills={techSkills}
+          skills={cv.techSkills}
           icon={<StarIcon className="h-6 w-6"></StarIcon>}
         />
         <ListBox
           heading="Språk"
           className="font-bold"
-          skills={Object.entries(languageSkills).map((language) => (
-            <LanguageBoxItem language={language} />
+          skills={cv.languageSkills?.map((langItem: LanguageItem) => (
+            <>
+              <LanguageBoxItem language={langItem} />
+            </>
           ))}
           icon={<GlobeAltIcon className="h-6 w-6" />}
         />
         <ListBox
           heading="Körkort"
           className="font-bold"
-          skills={drivingLicenses}
+          skills={cv.drivingLicenses}
           icon={<TruckIcon className="h-6 w-6"></TruckIcon>}
         />
       </aside>
@@ -54,10 +48,10 @@ const CV = () => {
         <ListBox
           heading="Arbetslivserfarenheter"
           className="font-bold text-2xl"
-          skills={workEntries.map((work) => (
+          skills={cv.workEntries?.map((work) => (
             <CVBoxItem
-              heading={work.entryTitle}
-              content={<CVBoxContent items={work.items} />}
+              heading={work.title}
+              content={<CVBoxContent content={work} />}
             />
           ))}
           icon={<BriefcaseIcon className="h-12 w-12" />}
@@ -65,7 +59,7 @@ const CV = () => {
         <ListBox
           heading="Utbildning"
           className="font-bold text-2xl"
-          skills={educations.map((education) => (
+          skills={cv.educations?.map((education) => (
             <CVBoxItem heading={education.school} content={education.course} />
           ))}
           icon={<AcademicCapIcon className="h-12 w-12" />}

@@ -1,9 +1,7 @@
 import { Nav } from "../components/Nav.tsx";
 import { Outlet } from "react-router-dom";
-
-import routes from "~react-pages";
 const Home = () => {
-  // console.log(routes);
+  //console.log(routes);
 
   return (
     <>

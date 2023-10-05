@@ -1,5 +1,5 @@
 {
-  "name": [
+  "person": {"name": [
     "Björn",
     "Agnemo"
   ],
@@ -7,7 +7,8 @@
   "location": "Domsjö, SE",
   "email": "bjorn.agnemo@gmail.com",
   "github": "cave-bjornson",
-  "phone": "0703038338",
+  "phone": "0703038338"
+  },
   "content": [
     {
       "sectionTitle": "Profil",

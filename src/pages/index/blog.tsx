@@ -13,9 +13,9 @@ const Blog = () => {
       <aside>
         <h1 className="font-bold text-2xl">Blog</h1>
         <ul>
-          {blogRoot.map((item, index) => (
+          {blogRoot?.map((item, index) => (
             <li key={index}>
-              <NavLink to={item.path}>{item.path}</NavLink>
+              <NavLink to={item.path ?? ""}>{item.path}</NavLink>
             </li>
           ))}
         </ul>
@@ -43,17 +43,19 @@ const Blog = () => {
 export default Blog;
 
 export const useFetchPostInfo = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<string[]>([]);
   const blogRoot = useLinks();
 
-  const updatePosts = (post) => {
+  const updatePosts = (post: string) => {
     setPosts((prevState) => [...prevState, post]);
   };
 
   useEffect(() => {
     (async function onLoad() {
-      const postPaths = blogRoot.filter((item) => item.path.length > 0);
-      postPaths.forEach((item) => {
+      const postPaths = blogRoot?.filter(
+        (item) => item.path && item?.path?.length > 0
+      );
+      postPaths?.forEach((item) => {
         import(`./blog/${item.path}.mdx`).then((res) => {
           updatePosts(res.title);
         });

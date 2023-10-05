@@ -5,7 +5,7 @@ import {
   PhoneIcon,
 } from "@heroicons/react/24/solid";
 import { ReactElement } from "react";
-import { languageTuple, Person } from "./hooks.tsx";
+import { Person, Item, LanguageItem } from "./hooks.tsx";
 
 export const PersonalInfo = ({ person }: { person: Person }) => {
   return (
@@ -50,7 +50,7 @@ export const ListBox = ({
 }: {
   heading: string;
   className: string;
-  skills: Array<string | ReactElement>;
+  skills: Array<string | ReactElement | undefined> | undefined;
   icon?: ReactElement;
 }) => {
   return (
@@ -60,7 +60,7 @@ export const ListBox = ({
         <span className={className}>{heading}</span>
       </div>
       <ul>
-        {skills.map((value, index) => (
+        {skills?.map((value, index) => (
           <li key={index}>{value}</li>
         ))}
       </ul>
@@ -68,11 +68,11 @@ export const ListBox = ({
   );
 };
 
-export const LanguageBoxItem = ([name, value]: languageTuple) => {
+export const LanguageBoxItem = ({ language }: { language: LanguageItem }) => {
   return (
     <>
-      <span className="block">{name}</span>
-      <progress max={4} value={value}></progress>
+      <span className="block">{language.name}</span>
+      <progress max={4} value={language.value}></progress>
     </>
   );
 };
@@ -81,7 +81,7 @@ export const CVBoxItem = ({
   heading,
   content,
 }: {
-  heading: string;
+  heading: string | undefined;
   content: string | ReactElement;
 }) => {
   return (
@@ -92,20 +92,30 @@ export const CVBoxItem = ({
   );
 };
 
-export const CVBoxContent = ({ items }) => {
-  return (
-    <>
-      {items.length === 1 ? (
-        <div>{items[0].itemTitle}</div>
-      ) : (
-        <ul>
-          {items.map((item, index) => (
-            <li key={index} className="list-inside list-disc">
-              {item}
-            </li>
-          ))}
-        </ul>
-      )}
-    </>
-  );
+export const CVBoxContent = ({ content }: { content: CVBItem }) => {
+  if (content.items !== undefined && content.items?.length !== 0) {
+    return <>{<div>{content.items[0].itemTitle}</div>}</>;
+  } else if (content.str !== undefined) {
+    return (
+      <>
+        {
+          <ul>
+            {content.str.map((val, index) => {
+              return (
+                <li key={index} className="list-inside list-disc">
+                  {val}
+                </li>
+              );
+            })}
+          </ul>
+        }
+      </>
+    );
+  }
 };
+
+export interface CVBItem {
+  title: string | undefined;
+  items: Item[] | undefined;
+  str: string[] | undefined;
+}
