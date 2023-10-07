@@ -1,13 +1,7 @@
 import useKeypress from "react-use-keypress";
 import { Suspense, useEffect, useState } from "react";
 import { useRoutes } from "react-router-dom";
-// import { Simple404 } from "@404pagez/react";
-// import { About } from "./index.tsx";
-// import { Nav } from "./components/Nav.tsx";
-// import { Portfolio } from "./Portfolio.tsx";
 import { Modal } from "react-responsive-modal";
-// import { router } from "./router.ts";
-// import { MainLayout } from "./components/MainLayout.tsx";
 import routes from "~react-pages";
 
 export const App = () => {

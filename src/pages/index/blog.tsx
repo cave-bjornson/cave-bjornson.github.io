@@ -1,7 +1,8 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 
 import { useLinks } from "../../components/hooks.tsx";
-import { useEffect, useState } from "react";
+import { useFetchPostInfo } from "./blog/components/useFetchPostInfo.tsx";
+
 const Blog = () => {
   const blogRoot = useLinks();
   const { posts } = useFetchPostInfo();
@@ -22,14 +23,15 @@ const Blog = () => {
       </aside>
       <main>
         {location.pathname === "/blog" ? (
-          <>
+          <section>
             <h1>Summary</h1>
-            <ul>
-              {posts.map((post, index) => (
-                <li key={index}>{post}</li>
-              ))}
-            </ul>
-          </>
+            {posts.map((post, index) => (
+              <article key={index}>
+                <h2>{post.title}</h2>
+                <p>{post.summary}</p>
+              </article>
+            ))}
+          </section>
         ) : (
           <article className="prose">
             <Outlet />
@@ -41,27 +43,3 @@ const Blog = () => {
 };
 
 export default Blog;
-
-export const useFetchPostInfo = () => {
-  const [posts, setPosts] = useState<string[]>([]);
-  const blogRoot = useLinks();
-
-  const updatePosts = (post: string) => {
-    setPosts((prevState) => [...prevState, post]);
-  };
-
-  useEffect(() => {
-    (async function onLoad() {
-      const postPaths = blogRoot?.filter(
-        (item) => item.path && item?.path?.length > 0
-      );
-      postPaths?.forEach((item) => {
-        import(`./blog/${item.path}.mdx`).then((res) => {
-          updatePosts(res.title);
-        });
-      });
-    })();
-  }, [blogRoot]);
-
-  return { posts };
-};
