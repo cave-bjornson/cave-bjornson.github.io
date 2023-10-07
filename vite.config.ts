@@ -14,8 +14,8 @@ export default defineConfig({
       enforce: "pre",
       ...mdx({
         providerImportSource: "@mdx-js/react",
-        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
         rehypePlugins: [rehypeMdxCodeProps, rehypeHighlight],
+        remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
       }),
     },
     react(),
