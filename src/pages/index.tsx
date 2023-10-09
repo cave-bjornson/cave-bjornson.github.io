@@ -9,7 +9,6 @@ const Home = () => {
           className="flex flex-col md:flex-row justify-around w-full max-w-screen-lg h-fit"
         >
           <Outlet />
-          <Navigate to="/cv" />
         </div>
       </div>
     </>
