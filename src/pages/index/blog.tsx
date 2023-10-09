@@ -33,7 +33,7 @@ const Blog = () => {
             ))}
           </section>
         ) : (
-          <article className="prose">
+          <article className="prose bg-white p-4">
             <Outlet />
           </article>
         )}

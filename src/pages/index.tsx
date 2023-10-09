@@ -1,13 +1,16 @@
-import { Nav } from "../components/Nav.tsx";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 const Home = () => {
-  //console.log(routes);
-
   return (
     <>
-      <Nav />
-      <div id="main-content" className="lg:flex">
-        <Outlet />
+      {/*<Nav />*/}
+      <div id="main" className="flex flex-row grow justify-around mt-4">
+        <div
+          id="main-content"
+          className="flex flex-col md:flex-row justify-around w-full max-w-screen-lg h-fit"
+        >
+          <Outlet />
+          <Navigate to="/cv" />
+        </div>
       </div>
     </>
   );

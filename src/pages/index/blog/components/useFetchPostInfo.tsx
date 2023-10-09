@@ -16,7 +16,10 @@ export const useFetchPostInfo = () => {
       );
       postPaths?.forEach((item) => {
         import(`../${item.path}.mdx`).then((res) => {
-          updatePosts({ title: res.frontmatter.title, summary: "" });
+          updatePosts({
+            title: res.frontmatter.title,
+            summary: res.frontmatter.summary,
+          });
         });
       });
     })();

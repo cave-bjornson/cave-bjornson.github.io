@@ -15,10 +15,10 @@ import { ReactElement } from "react";
 export const Nav = () => {
   return (
     <>
-      <nav>
-        <ul className="lg:flex">
-          <li>
-            <NavLink to="about" className="flex">
+      <nav className="flex flex-row justify-center bg-black p-2 text-white">
+        <ul className="flex w-full max-w-5xl flex-col md:flex-row justify-between pl-4 text-2xl font-bold uppercase">
+          <li className="pr-6">
+            <NavLink to="about" className="flex items-center active:underline">
               {({ isActive }) => (
                 <CVLink
                   text="Om Mig"
@@ -29,8 +29,8 @@ export const Nav = () => {
               )}
             </NavLink>
           </li>
-          <li>
-            <NavLink to="cv" className="flex">
+          <li className="pr-6">
+            <NavLink to="cv" className="flex items-center active:underline">
               {({ isActive }) => (
                 <CVLink
                   text="CV"
@@ -41,8 +41,11 @@ export const Nav = () => {
               )}
             </NavLink>
           </li>
-          <li>
-            <NavLink to="portfolio" className="flex">
+          <li className="pr-6">
+            <NavLink
+              to="portfolio"
+              className="flex items-center active:underline"
+            >
               {({ isActive }) => (
                 <CVLink
                   text="Portfolio"
@@ -53,8 +56,8 @@ export const Nav = () => {
               )}
             </NavLink>
           </li>
-          <li>
-            <NavLink to="blog" className="flex">
+          <li className="pr-6">
+            <NavLink to="blog" className="flex items-center active:underline">
               {({ isActive }) => (
                 <CVLink
                   text="Blog"
@@ -84,7 +87,7 @@ export const CVLink = ({
 }) => {
   return (
     <>
-      {isActive ? activeIcon : inActiveIcon}
+      <span className="mr-2">{isActive ? activeIcon : inActiveIcon}</span>
       {text}
     </>
   );

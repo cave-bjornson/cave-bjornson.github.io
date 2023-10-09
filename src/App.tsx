@@ -3,6 +3,8 @@ import { Suspense, useEffect, useState } from "react";
 import { useRoutes } from "react-router-dom";
 import { Modal } from "react-responsive-modal";
 import routes from "~react-pages";
+import { Nav } from "./components/Nav.tsx";
+import { Footer } from "./components/Footer.tsx";
 
 export const App = () => {
   const [nKeyPress, setNKeyPress] = useState(0);
@@ -63,16 +65,16 @@ export const App = () => {
   // ]);
 
   return (
-    <>
-      {/*<Nav />*/}
-
-      <Suspense fallback={<div>Loading...</div>}>
-        {/*<RouterProvider router={router} />*/}
-        {useRoutes(routes)}
-      </Suspense>
+    <div
+      id="body"
+      className="bg-gray-200 min-h-screen flex flex-col justify-items-stretch"
+    >
+      <Nav />
+      <Suspense fallback={<div>Loading...</div>}>{useRoutes(routes)}</Suspense>
+      <Footer />
       <Modal open={leetOpen} onClose={onCloseLeetModal} center={true}>
         <h1>1337</h1>
       </Modal>
-    </>
+    </div>
   );
 };
