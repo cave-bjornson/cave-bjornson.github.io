@@ -183,36 +183,8 @@ export const useLinks = () => {
 
   // console.log(blogRoot);
 
-  return blogRoot.children;
+  return blogRoot?.children;
 };
-
-// export const useFetchPostInfo = () => {
-//   const [posts, setPosts] = useState([]);
-//   const blogRoot = useLinks();
-//
-//   useEffect(() => {
-//     (async function onLoad() {
-//       const postPaths = blogRoot.filter((item) => item.path.length > 0);
-//       console.log(postPaths);
-//       await Promise.all(
-//         postPaths.map((path) => {
-//           import("./" `${path.path}.mdx`).then((res) => {
-//             console.log(res.title);
-//             setPosts([...posts, res.title]);
-//           });
-//           // .then((res) => {
-//           //   //console.log(...posts);
-//           //   setPosts([res.title, ...posts]);
-//           //})
-//           //.catch((err) => console.log(err));
-//         })
-//       );
-//       //console.log(posts);
-//     })();
-//   }, []);
-//
-//   return { posts };
-//};
 
 export interface GithubRepo {
   id: number;
