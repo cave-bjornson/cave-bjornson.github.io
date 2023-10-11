@@ -18,7 +18,7 @@ export const Nav = () => {
       <nav className="flex flex-row justify-center bg-black p-2 text-white">
         <ul className="flex w-full max-w-5xl flex-col md:flex-row justify-between pl-4 text-2xl font-bold uppercase">
           <li className="pr-6">
-            <NavLink to="about" className="flex items-center active:underline">
+            <NavLink to="about" className="flex items-center">
               {({ isActive }) => (
                 <CVLink
                   text="Om Mig"
@@ -30,7 +30,7 @@ export const Nav = () => {
             </NavLink>
           </li>
           <li className="pr-6">
-            <NavLink to="cv" className="flex items-center active:underline">
+            <NavLink to="cv" className="flex items-center">
               {({ isActive }) => (
                 <CVLink
                   text="CV"
@@ -42,10 +42,7 @@ export const Nav = () => {
             </NavLink>
           </li>
           <li className="pr-6">
-            <NavLink
-              to="portfolio"
-              className="flex items-center active:underline"
-            >
+            <NavLink to="portfolio" className="flex items-center">
               {({ isActive }) => (
                 <CVLink
                   text="Portfolio"
@@ -57,7 +54,7 @@ export const Nav = () => {
             </NavLink>
           </li>
           <li className="pr-6">
-            <NavLink to="blog" className="flex items-center active:underline">
+            <NavLink to="blog" className="flex items-center">
               {({ isActive }) => (
                 <CVLink
                   text="Blog"

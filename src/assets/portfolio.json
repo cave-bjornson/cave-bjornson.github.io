@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Passa in",
+    "imgUrl": "passain-thumb.png",
+    "description": "Animation från en kurs när jag gick på Umeå Konstskola. Gjord med dv-kamera, OH-film, spritpenna och plastfärger."
+  },
+  {
+    "id": 2,
+    "title": "Täfteå-festivalen",
+    "imgUrl": "taftea-cropped.png",
+    "description": "Hemsida för den sista Täfteå-festivalen 2012. Wordpressida som inte finns kvar längre. Enda jag har kvar är banners, som inte är min design."
+  },
+  {
+    "id": 3,
+    "title": "Kreator",
+    "imgUrl": "kreator-www.png",
+    "description": "Hemsida för det före detta företaget Kreatoriet i Umeå. Wordpressida som inte finns kvar längre. Enda jag har kvar är designdokument och logotyper."
+  }
+]

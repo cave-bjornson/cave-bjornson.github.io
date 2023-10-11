@@ -9,7 +9,7 @@ export const CVBoxItem = ({
 }) => {
   return (
     <div className=" border-b border-black group-last:border-0">
-      <div className="font-bold">{heading}</div>
+      <div className="font-bold">{heading?.replace("--", "\u2014")}</div>
       <div className="my-4">{content}</div>
     </div>
   );

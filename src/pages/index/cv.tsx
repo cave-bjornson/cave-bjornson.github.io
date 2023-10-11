@@ -50,7 +50,7 @@ const CV = () => {
           <ListBox
             id="work-experience"
             heading="Arbetslivserfarenheter"
-            className="font-bold text-lg"
+            className="font-bold text-2xl"
             skills={cv.workEntries?.map((work) => (
               <CVBoxItem
                 heading={work.title}

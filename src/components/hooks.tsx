@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import gh_json from "../assets/gh.json";
 import routes from "~react-pages";
 import { CVBItem } from "./PersonalInfo.tsx";
+import { Octokit } from "@octokit/rest";
 
 export interface Root {
   person: Person;
@@ -131,30 +132,39 @@ export const useCvData = (): CVData => {
   return cvData;
 };
 
-//export const octokit = new Octokit();
+export const octokit = new Octokit();
 
-// export const useOctokit = () => {
-//   const [repos, setRepos] = useState([]);
-//
-//   useEffect(() => {
-//     (async function onLoad() {
-//       await octokit.rest.repos
-//         .listForUser({ username: "cave-bjornson", sort: "created" })
-//         .then((res) => {
-//           const filtered = res.data.filter((repo) =>
-//             repo.topics?.includes("portfolio")
-//           );
-//           setRepos(filtered);
-//         })
-//         .catch((err) => console.log(err));
-//     })();
-//   }, []);
-//
-//   return { repos };
-// };
+export const useOctokit = (): {
+  repos: Array<GithubRepo>;
+  loading: boolean;
+} => {
+  const [repos, setRepos] = useState<Array<GithubRepo>>([]);
+  const [ghLoading, setGhLoading] = useState(false);
+
+  useEffect(() => {
+    setGhLoading(true);
+    (async function onLoad() {
+      await octokit.rest.repos
+        .listForUser({ username: "cave-bjornson", sort: "created" })
+        .then((res) => {
+          const filtered = res.data.filter((repo) =>
+            repo.topics?.includes("portfolio")
+          ) as Array<unknown> as Array<GithubRepo>;
+          setRepos(filtered);
+          setGhLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setGhLoading(false);
+        });
+    })();
+  }, []);
+
+  return { repos: repos, loading: ghLoading };
+};
 
 export const useFakeOctokit = (): Array<GithubRepo> => {
-  const [repos, setRepos] = useState(Array<GithubRepo>);
+  const [repos, setRepos] = useState<Array<GithubRepo>>([]);
 
   const gh = gh_json as Array<unknown> as Array<GithubRepo>;
 
@@ -173,7 +183,7 @@ export const useLinks = () => {
 
   // console.log(blogRoot);
 
-  return blogRoot?.children;
+  return blogRoot.children;
 };
 
 // export const useFetchPostInfo = () => {
@@ -208,4 +218,7 @@ export interface GithubRepo {
   id: number;
   name: string;
   topics: Array<string>;
+  description: string;
+  html_url: string;
+  language: string;
 }

@@ -19,6 +19,8 @@ export const useFetchPostInfo = () => {
           updatePosts({
             title: res.frontmatter.title,
             summary: res.frontmatter.summary,
+            date: res.frontmatter.date,
+            path: item.path,
           });
         });
       });
@@ -31,4 +33,6 @@ export const useFetchPostInfo = () => {
 export interface PostMeta {
   title: string;
   summary: string;
+  date: string;
+  path: string | undefined;
 }

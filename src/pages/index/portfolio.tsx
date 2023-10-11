@@ -1,36 +1,45 @@
-import { useFakeOctokit } from "../../components/hooks.tsx";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Modal } from "react-responsive-modal";
-import { GithubRepo } from "../../components/hooks.tsx";
+import { PortfolioItem, useGetPortFolioItems } from "./components/hooks.tsx";
+import PortfolioCard from "./components/PortfolioCard.tsx";
 
 const Portfolio = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [item, setItem] = useState("");
+  const portfolioItems = useGetPortFolioItems();
+  const [selectedItem, setSelectedItem] = useState<PortfolioItem>();
 
-  //const { repos } = useOctokit();
-  const repos: Array<GithubRepo> = useFakeOctokit();
-
-  const onOpenModal = (portfolioitem: string): void => {
-    setItem(portfolioitem);
+  const onOpenModal = (portfolioItem: PortfolioItem): void => {
+    setSelectedItem(portfolioItem);
     setModalOpen(true);
   };
   const onCloseModal = () => {
-    setItem("");
+    setSelectedItem(undefined);
     setModalOpen(false);
   };
 
   return (
     <>
-      <ol>
-        {repos &&
-          repos.map((repo: GithubRepo) => (
-            <li key={repo.id} onClick={() => onOpenModal(repo.name)}>
-              {repo.name}
-            </li>
+      <main className="flex flex-col md:grid md:grid-cols-3 gap-4">
+        <Suspense fallback={<div>Loading...</div>}>
+          {portfolioItems.map((item) => (
+            <a href={"#"} onClick={() => onOpenModal(item)} key={item.id}>
+              <PortfolioCard portfolioItem={item} />
+            </a>
           ))}
-      </ol>
+        </Suspense>
+      </main>
       <Modal open={modalOpen} onClose={onCloseModal} center={true}>
-        <h1>{item}</h1>
+        <div className="flex flex-col md:w-[640px]">
+          <h1 className="text-xl font-bold">{selectedItem?.title}</h1>
+          <img
+            src={
+              selectedItem?.imgUrl ??
+              "https://placehold.co/640x480?text=No\\nImage"
+            }
+            alt=""
+          />
+          <p>{selectedItem?.description}</p>
+        </div>
       </Modal>
     </>
   );

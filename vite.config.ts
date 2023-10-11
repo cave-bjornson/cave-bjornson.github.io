@@ -21,7 +21,7 @@ export default defineConfig({
     react(),
     Pages({
       extensions: ["tsx", "jsx", "ts", "js", "mdx"],
-      exclude: ["**/components/*"],
+      exclude: ["**/components/*", "**/assets/*"],
     }),
   ],
 });
