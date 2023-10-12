@@ -1,11 +1,6 @@
-import { Outlet, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-const Home = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate("/cv");
-  }, []);
+import { Outlet } from "react-router-dom";
 
+const Home = () => {
   return (
     <>
       <div id="main" className="flex flex-row grow justify-around mt-4">

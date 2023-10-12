@@ -1,10 +1,11 @@
 import useKeypress from "react-use-keypress";
 import { Suspense, useEffect, useState } from "react";
-import { useRoutes } from "react-router-dom";
+import { RouteObject, useRoutes } from "react-router-dom";
 import { Modal } from "react-responsive-modal";
 import routes from "~react-pages";
 import { Nav } from "./components/Nav.tsx";
 import { Footer } from "./components/Footer.tsx";
+import CurryV from "./pages/index/index.tsx";
 
 export const App = () => {
   const [nKeyPress, setNKeyPress] = useState(0);
@@ -63,6 +64,14 @@ export const App = () => {
   //     ),
   //   },
   // ]);
+
+  const cvRoute: RouteObject = {
+    path: "/",
+    children: [{ path: "cv", element: <CurryV /> }],
+  };
+
+  // @ts-ignore
+  routes[0].children = [...routes[0].children, cvRoute];
 
   return (
     <div

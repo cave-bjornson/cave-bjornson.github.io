@@ -11,7 +11,7 @@ import { ListBox } from "../../components/ListBox.tsx";
 import { LanguageBoxItem } from "../../components/LanguageBoxItem.tsx";
 import { CVBoxItem } from "../../components/CVBoxItem.tsx";
 
-const CV = () => {
+const CurryV = () => {
   const cv: CVData = useCvData();
 
   return (
@@ -79,4 +79,4 @@ const CV = () => {
   );
 };
 
-export default CV;
+export default CurryV;

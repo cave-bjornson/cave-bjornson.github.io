@@ -4,19 +4,24 @@ import {
   FolderIcon,
   UserIcon,
   PencilSquareIcon,
+  BeakerIcon,
 } from "@heroicons/react/24/solid";
 import {
   UserIcon as UserOutlineIcon,
   BriefcaseIcon as BriefCaseOutlineIcon,
   FolderIcon as FolderOutlineIcon,
   PencilSquareIcon as PencilSquareOutlineIcon,
+  BeakerIcon as BeakerOutlineIcon,
 } from "@heroicons/react/24/outline";
 import { ReactElement } from "react";
 export const Nav = () => {
   return (
     <>
       <nav className="flex flex-row justify-center bg-black p-2 text-white">
-        <ul className="flex w-full max-w-5xl flex-col md:flex-row justify-between pl-4 text-2xl font-bold uppercase">
+        <ul
+          className="flex w-full max-w-5xl flex-col md:flex-row justify-between pl-4 text-2xl
+        font-bold uppercase [&>li>a.active]:underline underline-offset-4"
+        >
           <li className="pr-6">
             <NavLink to="about" className="flex items-center">
               {({ isActive }) => (
@@ -49,6 +54,18 @@ export const Nav = () => {
                   isActive={isActive}
                   activeIcon={<FolderIcon className="h-6 w-6" />}
                   inActiveIcon={<FolderOutlineIcon className="h-6 w-6" />}
+                />
+              )}
+            </NavLink>
+          </li>
+          <li className="pr-6">
+            <NavLink to="filler" className="flex items-center">
+              {({ isActive }) => (
+                <CVLink
+                  text="Duck"
+                  isActive={isActive}
+                  activeIcon={<BeakerIcon className="h-6 w-6" />}
+                  inActiveIcon={<BeakerOutlineIcon className="h-6 w-6" />}
                 />
               )}
             </NavLink>

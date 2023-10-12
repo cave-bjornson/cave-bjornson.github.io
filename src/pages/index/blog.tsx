@@ -28,6 +28,7 @@ const Blog = () => {
             {posts
               .map((post, index) => (
                 <BlogSummaryItem
+                  key={index}
                   id={index}
                   title={post.title}
                   summary={post.summary}
