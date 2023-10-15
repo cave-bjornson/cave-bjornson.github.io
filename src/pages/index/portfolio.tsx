@@ -22,7 +22,7 @@ const Portfolio = () => {
       <main className="flex flex-col md:grid md:grid-cols-3 gap-4">
         <Suspense fallback={<div>Loading...</div>}>
           {portfolioItems.map((item) => (
-            <a href={"#"} onClick={() => onOpenModal(item)} key={item.id}>
+            <a onClick={() => onOpenModal(item)} key={item.id}>
               <PortfolioCard portfolioItem={item} />
             </a>
           ))}
